@@ -1,0 +1,62 @@
+#preloader
+ %h1 Loading
+#container
+ #drawer
+  %form#samples
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/kick.wav" }  
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/snare.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/hihat.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/ssynth1.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/ssynth2.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/ssynth3.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/synth1.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/synth2.wav" }
+   %input{ :type => "text", :value => "https://dl.dropboxusercontent.com/u/87705298/sounds/6.wav" }
+ #panel
+  - (0...16).each do |led|
+   .led
+  #sequencer
+   - (0...9).each do |instrument|
+    %div{ :class => "row", :instrument => instrument }
+     - (0...17).each do |note|
+      - if note < 16
+       .note
+      - else
+       %input.knob.sample-volume-knob{ :type => "text", "data-height" => 25, "data-width" => 25, "data-angleArc" => 260, "data-angleOffset" => -130, "data-fgColor" => '#0af', "data-bgColor" => "#6e6e6e", "data-displayInput" => "false", "value" => 50, "data-thickness" => 0.6  }
+  #controls
+   - ['#0af', '#0fa', '#fa0'].each do |color|
+    - (0...17).each do |i|
+     - if i < 16
+      %input.knob{ :type => "text", "data-height" => 25, "data-width" => 25, "data-note" => i, "data-angleArc" => 260, "data-angleOffset" => -130, "data-fgColor" => color, "data-bgColor" => "#6e6e6e", "data-displayInput" => "false", "value" => 50, "data-thickness" => 0.6 }
+     - else
+      %br
+  #masters
+   .button-group
+    %button#saveBtn
+     Save
+    %button#loadBtn
+     Load
+   .button-group
+    %button#pausePlayBtn
+     Pause/Play
+    %button#resetBtn
+     Reset
+   .knob-group
+    %input.master#master-volume{ :type => "text", "data-fgColor" => '#0af', "data-bgColor" => "#6e6e6e", "data-height" => 80, "data-width" => 80, "data-angleArc" => 260, "data-angleOffset" => -130, :value => 50, :control => "volume" }
+    %input.master#master-sustain{ :type => "text", "data-fgColor" => '#0fa', "data-bgColor" => "#6e6e6e", "data-height" => 80, "data-width" => 80, "data-angleArc" => 260, "data-angleOffset" => -130, :value => 50, :control => "sustain" }
+    %input.master#master-pitch{ :type => "text", "data-fgColor" => '#fa0', "data-bgColor" => "#6e6e6e", "data-height" => 80, "data-width" => 80, "data-angleArc" => 260, "data-angleOffset" => -130, :value => 50, :control => "pitch" }
+   
+#howto
+ %p Welcome to the "HTML/CSS/JS Sequencer"
+ %p Designed to work in Webkit (chrome) browsers, some things are funky in firefox.
+ %p
+  %a{ :href => "https://www.youtube.com/watch?v=od4GjF5g5V0" }Demo
+ %p In order to start making some tunes, turn on some of those square lights on the top of the sequencer. You can change what tunes these magical tune-lights play by clicking the little gray bar on the left of the sequencer, and pasting in URLs to your favorite .WAV files (Or any suitable sound file I suppose).
+ %p Great! Definintely the world's next Skrillex in the making.
+ %p Want to make your tunes better? Start playing with the little knobbies. The blue ones adjust the volume, the green ones adjust the tempo, the orange ones adjust the pitch. The little knobs adjust said functions on a note-by-note basis, the big ones adjust said functions on a song-wide level.
+ %p The first 3 red rows are reserved for drum samples, and therefor are unaffected by the orange pitch knob.
+ %p The next 3 green rows are reserved for melodies and things that are going to get heavily modified by the pitch (orange) knob
+ %p The final 3 blue rows are like the drum rows in that they are not affected by the pitch control, but they are also not affected by the note-by-note volume control (the sample-by-sample volume control still works, however)
+ %p And that's all it takes to be a "HTML/CSS/JS Sequencer, Bro" Master!
+ %p
+  %a{ :href => "mattroelle.com" } By: Matt roelle | mattroelle.com
